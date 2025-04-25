@@ -125,3 +125,4 @@ def resolver_por_genetico(tamanho_tabuleiro, casas_bloqueadas, qtd_pop=1000, lim
         "melhor_pontuacao": max(avaliacoes),
         "media_populacao": sum(avaliacoes) / len(avaliacoes)
     }
+
