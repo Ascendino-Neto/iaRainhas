@@ -1,19 +1,17 @@
 from bloqueios import gerar_restricoes_tabuleiro as gerar_bloqueios, imprimir_tabuleiro as mostrar_tabuleiro
 from genetico import resolver_por_genetico as resolver_com_genetico
 
-
 def mostrar_dados_execucao(n, sucesso, nos, tempo, melhor_avaliacao, media_avaliacao):
     print("\nResumo da Execução:")
-    print("+-----------+--------------------+-------------+--------------+----------+----------+")
-    print("|  Tamanho  | Solução Encontrada |     Nós     |  Tempo (ms)  |  Melhor  |  Média   |")
-    print("+-----------+--------------------+-------------+--------------+----------+----------+")
-    print(f"| {n:<9} | {sucesso:<18} | {nos:<11} | {tempo * 1000:<12.2f} | {melhor_avaliacao:<8} | {media_avaliacao:<8.2f} |")
-    print("+-----------+--------------------+-------------+--------------+----------+----------+")
-
+    print("+-----------+--------------------+-----------------+-----------------+--------------+--------------+")
+    print("|  Tamanho  | Solução Encontrada |       Nós       |   Tempo (ms)    |    Melhor    |    Média     |")
+    print("+-----------+--------------------+-----------------+-----------------+--------------+--------------+")
+    print(f"| {n:^9} | {sucesso:^18} | {nos:^15} | {tempo:^15.2f} | {melhor_avaliacao:^12} | {media_avaliacao:^12.2f} |")
+    print("+-----------+--------------------+-----------------+-----------------+--------------+--------------+")
 
 def rodar_algoritmo(n):
     restricoes = gerar_bloqueios(n)  # Gera as posições bloqueadas no tabuleiro
-    resultado = resolver_com_genetico(n, restricoes)  
+    resultado = resolver_com_genetico(n, restricoes)
     solucao = resultado["solucao"]
     tempo = resultado["tempo"]
     nos = resultado["nos_avaliados"]
@@ -25,11 +23,11 @@ def rodar_algoritmo(n):
 
     print(f"\nProcessando n = {n} ...")
     if solucao:
-        mostrar_tabuleiro(n, solucao, restricoes)  
+        mostrar_tabuleiro(n, solucao, restricoes)
     else:
-        print("Nenhuma solução válida foi encontrada.")  
+        print("Nenhuma solução válida foi encontrada.")
 
-    mostrar_dados_execucao(n, sucesso, nos, tempo, melhor_avaliacao, media_avaliacao)  
+    mostrar_dados_execucao(n, sucesso, nos, tempo, melhor_avaliacao, media_avaliacao)
 
 
 def main():
@@ -43,7 +41,7 @@ def main():
             try:
                 n = int(input("Digite o valor de n (entre 8 e 512): "))
                 if 8 <= n <= 512:
-                    rodar_algoritmo(n)  # Executa para o valor de N informado
+                    rodar_algoritmo(n)
                 else:
                     print("Valor fora do intervalo permitido.")
             except ValueError:
@@ -54,7 +52,7 @@ def main():
                 fim = int(input("Valor final (máximo 512): "))
                 if ini >= 8 and fim <= 512 and ini <= fim:
                     for n in range(ini, fim + 1):
-                        rodar_algoritmo(n)  # Executa para a faixa de valores entre inicio e fim
+                        rodar_algoritmo(n)
                 else:
                     print("Intervalo inválido.")
             except ValueError:
@@ -62,9 +60,15 @@ def main():
         else:
             print("Escolha inválida.")
 
-        if input("\nDeseja executar novamente? (T/F): ").strip().upper() != "T":
-            break
+        while True:
+            repetir = input("\nDeseja executar novamente? (Yes/No): ").strip().lower()
+            if repetir == "yes":
+                break
+            elif repetir == "no":
+                return
+            else:
+                print("Entrada inválida. Digite 'yes' para continuar ou 'no' para sair.")
 
 
 if __name__ == "__main__":
-    main()  
+    main()
