@@ -96,7 +96,7 @@ def resolver_por_genetico(tamanho_tabuleiro, casas_bloqueadas, qtd_pop=1000, lim
                 fim_execucao = time.time()
                 return {
                     "solucao": populacao[idx],
-                    "tempo": fim_execucao - inicio_execucao,
+                    "tempo": (fim_execucao - inicio_execucao) * 1000,  # CONVERTENDO PARA MS AQUI!!!
                     "nos_avaliados": total_avaliacoes,
                     "melhor_pontuacao": max(avaliacoes),
                     "media_populacao": sum(avaliacoes) / len(avaliacoes)
@@ -110,7 +110,7 @@ def resolver_por_genetico(tamanho_tabuleiro, casas_bloqueadas, qtd_pop=1000, lim
                 fim_execucao = time.time()
                 return {
                     "solucao": tentativa,
-                    "tempo": fim_execucao - inicio_execucao,
+                    "tempo": (fim_execucao - inicio_execucao) * 1000, 
                     "nos_avaliados": total_avaliacoes,
                     "melhor_pontuacao": max(avaliacoes),
                     "media_populacao": sum(avaliacoes) / len(avaliacoes)
@@ -120,9 +120,8 @@ def resolver_por_genetico(tamanho_tabuleiro, casas_bloqueadas, qtd_pop=1000, lim
     fim_execucao = time.time()
     return {
         "solucao": None,
-        "tempo": fim_execucao - inicio_execucao,
+        "tempo": (fim_execucao - inicio_execucao) * 1000,  # CONVERTENDO PARA MS AQUI!!!
         "nos_avaliados": total_avaliacoes,
         "melhor_pontuacao": max(avaliacoes),
         "media_populacao": sum(avaliacoes) / len(avaliacoes)
     }
-
